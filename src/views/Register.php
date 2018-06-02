@@ -1,106 +1,78 @@
-<!DOCTYPE HTML>
-<html>
-    <head>
-        <title>GroupConcert - Register</title>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-        <link rel="stylesheet" href="../assets/css/main.css" />
-    </head>
-    <body>
-        <div id="wrapper">
-            <div id="main">
-                <div class="inner">
-                        <header id="header">
-                            <h1 class="logo" id="register-title">Register</h1>
-                        </header>
-                        <section id="register-banner" class="banner">
-                            <form method="post" action="../controllers/Register.php">
-                                <div class="row uniform" id="register-inputs">
-                                    <div class="8u 12u$(xsmall)">
-                                        <input type="text" name="username" id="username" placeholder="Username" required />
-                                        <div class="error">
-                                            <?php if(isset($_GET['username']) && $_GET['username']):?>
-                                                Username is required.
-                                            <?php endif?>
-                                        </div>
-                                    </div>
-                                    <div class="8u 12u$(xsmall)">
-                                        <input type="password" name="password" id="password" placeholder="Password" />
-                                        <div class="error">
-                                            <?php if(isset($_GET['password']) && $_GET['password']):?>
-                                                Password is required.
-                                            <?php endif?>
-                                        </div>
-                                    </div>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
 
-                                    <div class="8u 12u$(xsmall)">
-                                        <input type="password" name="repeated_password" id="repeated-password" placeholder="Repeat Password" />
-                                        <div class="error">
-                                            <?php if(isset($_GET['repeated_password']) && $_GET['repeated_password']):?>
-                                                Passwords does not match.
-                                            <?php endif?>
-                                        </div>
-                                    </div>
+    <title>Group Concert</title>
 
-                                    <div class="8u 12u$(xsmall)">
-                                        <input type="email" name="email" id="email" placeholder="Email" />
-                                        <div class="error">
-                                            <?php if(isset($_GET['email']) && $_GET['email']):?>
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="../assets/css/main.css" rel="stylesheet">
+  </head>
+
+  <body class="text-center">
+
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+      <header class="masthead mb-auto">
+        <div class="inner">
+          <h3 class="masthead-brand">Group Concert</h3>
+          <nav class="nav nav-masthead justify-content-center">
+            <a class="nav-link" href="./Register.php">Register</a>
+            <a class="nav-link" href="./Login.php">Login</a>
+          </nav>
+        </div>
+      </header>
+
+      <main role="main" class="inner cover">
+        <form class="form-signin" method="post" action="../controllers/Register.php">
+      <h1 class="h3 mb-3 font-weight-normal">Register</h1>
+    
+      <input type="email" id="email" name="email" class="form-control" placeholder="Email address" required autofocus>
+      <div class="error">
+      <?php if(isset($_GET['email']) && $_GET['email'] == 'false'):?>
                                                 Email is required and should be valid.
                                             <?php endif?>
                                         </div>
-                                    </div>
-
-                                    <div class="8u 12u$(xsmall)">
-                                        <input type="text" name="full_name" id="full-name" placeholder="Full Name" />
-                                        <div class="error">
-                                            <?php if(isset($_GET['full_name']) && $_GET['full_name']):?>
-                                                Full name is required.
+      <input type="text" id="username" name="username" class="form-control" placeholder="Username" required > 
+      <div class="error">
+                                            <?php if(isset($_GET['username']) && $_GET['username'] == 'false'):?>
+                                                Username is required and should be unique.
                                             <?php endif?>
                                         </div>
-                                    </div>
-                                    
-                                    <div class="8u 12u$">
-                                        <ul id="login-actions" class="actions">
-                                            <li><input type="submit" value="Register" class="special" /></li>
-                                            <li><input type="reset" value="Reset" /></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </form>
-                        </section>
-                </div>
-            </div>
+      <input type="text" id="fullName" name="fullName" class="form-control" placeholder="Full name" required >
+      <div class="error">
 
-            <div id="sidebar">
-                <div class="inner">
-                        <section id="search" class="alt">
-                            <h2>Group Concert</h2>
-                        </section>
+      <?php if(isset($_GET['full_name']) && $_GET['full_name'] == 'false'):?>
+                                                Full name is required.
+                                            <?php endif?></div>
+      <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+      <div class="error">
+                                            <?php if(isset($_GET['password']) && $_GET['password'] == 'false'):?>
+                                                Password is required.
+                                            <?php endif?>
+                                        </div>
+      <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" placeholder="Confirm password" required>
+      <div class="error">
+                                            <?php if(isset($_GET['confirmPassword']) && $_GET['confirmPassword'] == 'false'):?>
+                                                Passwords does not match.
+                                            <?php endif?>
+                                        </div>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+    </form>
+      </main>
 
-                        <nav id="menu">
-                            <header class="major">
-                                <h2>Menu</h2>
-                            </header>
-                            <ul>
-                                <li><a href="./HomepageView.php">Homepage</a></li>
-                                <li><a href="./LoginView.php">Login</a></li>
-                                <li><a href="./RegisterView.php">Register</a></li>
-                            </ul>
-                        </nav>
-
-                        <footer id="footer">
-                            <p class="copyright">&copy; Group Concert. All rights reserved.</p>
-                        </footer>
-
-                </div>
-            </div>
+      <footer class="mastfoot mt-auto">
+        <div class="inner">
+        <p class="copyright">&copy; Group Concert. All rights reserved.</p> 
         </div>
+      </footer>
+    </div>
 
-        <script src="../assets/js/jquery.min.js"></script>
-        <script src="../assets/js/skel.min.js"></script>
-        <script src="../assets/js/util.js"></script>
-        <script src="../assets/js/main.js"></script>
-
-    </body>
+    <script src="../assets/js/jquery.min.js"></script>
+    <script src="../assets/js/bootstrap.min.js"></script>
+  </body>
 </html>
