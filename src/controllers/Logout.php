@@ -3,6 +3,6 @@ session_start();
 session_unset();
 session_destroy();
 
-header("Location:../views/HomePageView.php");
+header("Location:../views/Home.php");
 exit();
 ?>
