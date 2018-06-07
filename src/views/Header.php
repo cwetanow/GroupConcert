@@ -4,7 +4,7 @@
           <nav class="nav nav-masthead justify-content-center">
           <?php
             if(isset($_SESSION['current_user_id'])){
-              echo '<a class="nav-link" href="../controllers/Host.php">Host</a>';
+              echo '<a class="nav-link" href="./Host.php">Host</a>';
               echo '<a class="nav-link" href="../controllers/Logout.php">Logout</a>';
              } else{
               echo '<a class="nav-link" href="./Register.php">Register</a>';
