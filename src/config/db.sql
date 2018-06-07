@@ -11,10 +11,12 @@ CREATE TABLE users (
 
 CREATE TABLE concerts (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  title VARCHAR(128),
   start_date DATE,
   host_id INT NOT NULL,
-  location VARCHAR(128),
+  address VARCHAR(128),
+  title VARCHAR(128),
+  city VARCHAR(128),
+  spots INT,
   FOREIGN KEY (host_id) REFERENCES users(id)
 );
 
