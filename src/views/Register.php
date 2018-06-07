@@ -22,12 +22,12 @@
     header('Location: ./Home.php');
     }
   ?>
-    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <div class="container d-flex w-100 h-100 p-3 mx-auto flex-column">
     <?php
 include('./Header.php')?>
 
       <main role="main" class="inner cover">
-        <form class="form-signin" method="post" action="../controllers/Register.php">
+        <form class="custom-form" method="post" action="../controllers/Register.php">
       <h1 class="h3 mb-3 font-weight-normal">Register</h1>
     
       <input type="email" id="email" name="email" class="form-control" placeholder="Email address" required autofocus>
