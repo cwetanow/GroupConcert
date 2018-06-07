@@ -28,7 +28,7 @@ if (!$is_username_valid || !$is_password_valid || !$is_confirmPassword_valid || 
     $isSuccessful = $user->insert();
 
     if ($isSuccessful) {
-        header('Location: ../views/Home.php');
+        header('Location: ../views/Login.php');
     } else {
         echo "<p> Error! The subject was not inserted! </p>";
     }
