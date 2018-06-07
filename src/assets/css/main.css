@@ -86,24 +86,24 @@ body {
   color: rgba(255, 255, 255, .5);
 }
 
-.form-signin {
+.custom-form {
   width: 100%;
   max-width: 330px;
   padding: 15px;
   margin: auto;
 }
 
-.form-signin .form-control {
+.custom-form .form-control {
   position: relative;
   box-sizing: border-box;
   padding: 10px;
   font-size: 16px;
 }
-.form-signin .form-control:focus {
+.custom-form .form-control:focus {
   z-index: 2;
 }
 
-.form-signin input {
+.custom-form input {
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
   margin-bottom: 2px;
