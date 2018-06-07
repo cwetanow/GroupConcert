@@ -15,17 +15,17 @@
   </head>
 
   <body class="text-center">
+  <?php
+    session_start();
 
+    if(isset($_SESSION['current_user_id'])){
+  echo 12;
+  header('Location: ./Home.php');
+    }
+  ?>
     <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-      <header class="masthead mb-auto">
-        <div class="inner">
-          <h3 class="masthead-brand">Group Concert</h3>
-          <nav class="nav nav-masthead justify-content-center">
-            <a class="nav-link" href="./Register.php">Register</a>
-            <a class="nav-link" href="./Login.php">Login</a>
-          </nav>
-        </div>
-      </header>
+    <?php
+include('./Header.php')?>
 
       <main role="main" class="inner cover">
         <form class="form-signin" method="post" action="../controllers/Login.php">
