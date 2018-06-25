@@ -67,4 +67,18 @@ class Concert implements \JsonSerializable
         }
         return $participants;
     } 
+
+    public static function isUserParticipant($concert_id, $user_id)
+    {      
+        $query = (new Db())->getConn()->prepare("SELECT u.full_name, u.id, u.username FROM concert_participants p JOIN users u ON p.user_id = u.id WHERE p.concert_id = '$concert_id' AND p.user_id = '$user_id'");
+
+        $query->execute();
+        $user = new User();            
+        while ($found_participant = $query->fetch())
+        {
+            $user->setId($found_participant["id"]);            
+        }
+        
+        return $user;
+    }
 }
