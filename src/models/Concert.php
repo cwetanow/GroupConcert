@@ -121,6 +121,32 @@ class Concert implements \JsonSerializable
         return $concert;
     }
 
+    public function getAllConcerts()
+    {
+        $query = (new Db())->getConn()->prepare("");
+        $query->execute();
+
+        $active_concerts = [];
+        while ($current_concert = $query->fetch())
+        {
+          $current_date = date();
+
+          if(date_create($current_date) < date_create($current_concert['start_date'])){
+              $concert =  new Concert();
+              $concert->setId($current_concert['id']);
+              $concert->setDate($current_concert['start_date']);
+              $concert->setAddress($current_concert['address']);
+              $concert->setTitle($current_concert['title']);
+              $concert->setCity($current_concert['city']);
+              $concert->setSpots($current_concert['spots']);
+
+              $active_concerts[] = $sprint;
+          }           
+        }
+
+        return $active_concerts;  
+    }
+
     public function insert()
     {
         $query = (new Db())->getConn()->prepare("INSERT INTO `concerts` (start_date, host_id, address, title, city, spots) VALUES (?, ?, ?, ?, ?, ?) ");
