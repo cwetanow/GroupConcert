@@ -123,13 +123,13 @@ class Concert implements \JsonSerializable
 
     public function getAllConcerts()
     {
-        $query = (new Db())->getConn()->prepare("");
+        $query = (new Db())->getConn()->prepare("SELECT * FROM concerts");
         $query->execute();
 
         $active_concerts = [];
         while ($current_concert = $query->fetch())
         {
-          $current_date = date();
+          $current_date = date("Y-m-d h:i:sa");
 
               $concert =  new Concert();
               $concert->setId($current_concert['id']);
@@ -149,7 +149,7 @@ class Concert implements \JsonSerializable
 
     public function getIsActive()
     {
-      $current_date = date();
+      $current_date = date("Y-m-d h:i:sa");
       $concert_date = $this->getDate();
 
       return (date_create($current_date) < date_create($concert_date));

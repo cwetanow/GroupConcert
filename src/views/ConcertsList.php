@@ -13,13 +13,18 @@
 
     <link href="../assets/css/main.css" rel="stylesheet">
 
+    <style>
+      .card, .card a {
+        color: #333;
+      }
+    </style>
+
   </head>
 
   <body class="text-center">
 
     <div class="container d-flex w-100 h-100 p-3 mx-auto flex-column">
-    <?php session_start();
-include './Header.php'?>
+    <?php include '../views/Header.php'?>
 
       <main role="main" class="inner cover">
 <ul class="list-group">
@@ -32,7 +37,7 @@ include './Header.php'?>
                                         {
                                             foreach($active_concerts as $concert)
                                             {
-                                                echo ' <li class="list-group-item"><a href="./GetConcert.php?id='.$concert->getId().'">'.$concert->getTitle().'</a></li>';                                  
+                                             echo '<div class="card" style="width: 33rem;"><div class="card-body"><h5 class="card-title"><a href="./GetConcert.php?id='.$concert->getId().'">'.$concert->getTitle().'</a></h5><h6 class="card-subtitle mb-2 text-muted">'.date('l, jS \of F, Y h:i:s A', strtotime($concert->getDate())).'</h6><p class="card-link">'.$concert->getAddress().', '.$concert->getCity().'</p></div></div><br>';
                                             }
                                         }
                                     ?>

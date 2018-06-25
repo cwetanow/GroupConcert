@@ -46,7 +46,7 @@ include './Header.php'?>
                                             <?php endif?>
                                         </div>
 
-<input type="date" id="date" name="date" class="form-control" placeholder="Date" required >
+<input type="datetime-local" step=1 id="date" name="date" class="form-control" placeholder="Date" required >
       <div class="error">
                                             <?php if (isset($_GET['date']) && $_GET['date'] == 'false'): ?>
                                                 Date is required
