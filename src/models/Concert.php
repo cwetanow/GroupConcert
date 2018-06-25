@@ -162,6 +162,13 @@ class Concert implements \JsonSerializable
         return $query->execute([$this->date, $this->host_id, $this->address, $this->title, $this->city, $this->spots]);
     }
 
+    public static function delete($concert_id)
+    {
+        $query = (new Db())->getConn()->prepare("DELETE FROM concerts WHERE id=?");
+        
+        return $query->execute([$concert_id]);
+    }
+
     public function jsonSerialize()
     {
         return (object) get_object_vars($this);
