@@ -169,6 +169,12 @@ class Concert implements \JsonSerializable
         return $query->execute([$concert_id]);
     }
 
+    public static function edit($id, $address, $city, $date, $title, $spots)
+    {
+        $query = (new Db())->getConn()->prepare("UPDATE concerts SET title=?, start_date=?, address=?, city=?, spots=? WHERE id=?");
+        return $query->execute([$title, $date, $address, $city, $spots, $id]);
+    }
+
     public function jsonSerialize()
     {
         return (object) get_object_vars($this);
