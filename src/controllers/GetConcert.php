@@ -15,6 +15,7 @@ if(!isset($_SESSION['current_user_id'])) {
 	
 	$concert_id = $_GET['id'];
 	$concert = Concert::getById($concert_id);
+	$concert->populateHost();
 
 	if($concert->getTitle()) {
 	  require_once('../views/ConcertDetails.php');	

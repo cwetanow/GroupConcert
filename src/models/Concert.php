@@ -10,6 +10,7 @@ class Concert implements \JsonSerializable
     private $city;
     private $date;
     private $host_id;
+    private $host;
     private $title;
     private $spots;
 
@@ -39,6 +40,16 @@ class Concert implements \JsonSerializable
     public function getId()
     {
         return $this->id;
+    }
+
+    public function setHost($host)
+    {
+        $this->host = $host;
+    }
+
+    public function getHost()
+    {
+        return $this->host;
     }
 
     public function setAddress($address)
@@ -173,6 +184,17 @@ class Concert implements \JsonSerializable
     {
         $query = (new Db())->getConn()->prepare("UPDATE concerts SET title=?, start_date=?, address=?, city=?, spots=? WHERE id=?");
         return $query->execute([$title, $date, $address, $city, $spots, $id]);
+    }
+
+    public function populateHost()
+    {
+        $concert_id = $this->getId(); 
+
+        $query = (new Db())->getConn()->prepare("SELECT c.*, u.username FROM concerts c JOIN users u ON c.host_id = u.id WHERE c.id = '$concert_id'");
+        $query->execute();
+
+        $current_concert = $query->fetch();
+        $this->setHost($current_concert['username']);
     }
 
     public function jsonSerialize()

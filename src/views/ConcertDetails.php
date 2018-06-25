@@ -18,8 +18,7 @@
   <body class="text-center">
 
     <div class="container d-flex w-100 h-100 p-3 mx-auto flex-column">
-    <?php session_start();
-include './Header.php'?>
+    <?php include '../views/Header.php'?>
 
       <main role="main" class="inner cover">
         <header>
@@ -27,7 +26,7 @@ include './Header.php'?>
                                 <?php 
                                     if($concert->getIsActive())
                                     {
-                                        echo '<p>'.$concert->getDate().'</p>';
+                                        echo '<p>'.date('l, jS \of F, Y h:i:s A', strtotime($concert->getDate())).'</p>';
                                     }
                                     else
                                     {
@@ -35,6 +34,11 @@ include './Header.php'?>
                                     }
                                 ?>
                             </header>
+
+                             <?php 
+                              echo '<h3>'.$concert->getAddress().', '.$concert->getCity().'</h3>';
+                              echo '<h3>By '.$concert->getHost().'</h3>';
+                             ?>
       </main>
 
       <footer class="mastfoot mt-auto">
