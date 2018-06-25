@@ -131,7 +131,6 @@ class Concert implements \JsonSerializable
         {
           $current_date = date();
 
-          if(date_create($current_date) < date_create($current_concert['start_date'])){
               $concert =  new Concert();
               $concert->setId($current_concert['id']);
               $concert->setDate($current_concert['start_date']);
@@ -140,11 +139,20 @@ class Concert implements \JsonSerializable
               $concert->setCity($current_concert['city']);
               $concert->setSpots($current_concert['spots']);
 
-              $active_concerts[] = $sprint;
+          if($concert->getIsActive()){
+              $active_concerts[] = $concert;
           }           
         }
 
         return $active_concerts;  
+    }
+
+    public function getIsActive()
+    {
+      $current_date = date();
+      $concert_date = $this->getDate();
+
+      return (date_create($current_date) < date_create($concert_date));
     }
 
     public function insert()
