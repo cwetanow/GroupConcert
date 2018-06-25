@@ -26,7 +26,7 @@ include('./Header.php')?>
 
       <footer class="mastfoot mt-auto">
         <div class="inner">
-        <p class="copyright">&copy; Group Concert. All rights reserved.</p> 
+        <p class="copyright">&copy; WWW 10th ed, Group Concert by I.Mladenov (61950). All rights reserved.</p> 
         </div>
       </footer>
     </div>
