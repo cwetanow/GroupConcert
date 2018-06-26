@@ -3,8 +3,9 @@ require_once "../libs/Startup.php";
 Startup::_init(true);
 use models\Concert;
 use models\ConcertPerformRequest;
+use models\ConcertParticipant;
 use models\User;
-use models\Error;
+use models\Comment;
 
 session_start();
 
@@ -26,6 +27,10 @@ if(!isset($_SESSION['current_user_id'])) {
 
     if($concert->getHostId() !== $current_user){
       $hasSentRequest = ConcertPerformRequest::hasUserSentPerformRequest($concert_id, $current_user);
+    }
+
+    if(ConcertParticipant::isUserParticipant($concert_id, $current_user)){
+      $comments = Comment::getConcertComments($concert_id);
     }
 
 	  require_once('../views/ConcertDetails.php');	

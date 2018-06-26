@@ -105,7 +105,7 @@ class Comment implements \JsonSerializable
 
     public static function getConcertComments($concert_id)
     {
-        $query = (new Db())->getConn()->prepare("SELECT u.username, c.id, c.concert_id, c.comment_date, c.user_id, c.comment_text FROM comments c JOIN users u ON c.user_id = u.id WHERE c.concert_id = '$concert_id'");
+        $query = (new Db())->getConn()->prepare("SELECT u.username, c.id, c.concert_id, c.comment_date, c.user_id, c.comment_text FROM comments c JOIN users u ON c.user_id = u.id WHERE c.concert_id = '$concert_id' ORDER BY c.comment_date");
         
         $query->execute();
         
