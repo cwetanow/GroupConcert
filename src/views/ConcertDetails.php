@@ -62,6 +62,8 @@
                                              echo '<form class="custom-form" method="post" action="../controllers/ApproveRequest.php?id='.$perform_request->getConcertId().'&userId='.$perform_request->getUserId().'"><button class="btn btn-lg btn-primary btn-block" type="submit">Approve</button></form>';
                                                       echo '<br><form class="custom-form" method="post" action="../controllers/RejectRequest.php?id='.$perform_request->getConcertId().'&userId='.$perform_request->getUserId().'"><button class="btn btn-lg btn-primary btn-block" type="submit">Reject</button></form>';
                                             }
+                                    } else if(isset($hasSentRequest) && !$hasSentRequest){
+                                      echo '<form class="custom-form" method="post" action="../controllers/PostPerformRequest.php?id='.$perform_request->getConcertId().'"><button class="btn btn-lg btn-primary btn-block" type="submit">Perform</button></form>';
                                     }
                                 ?>
       </main>

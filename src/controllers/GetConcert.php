@@ -24,6 +24,10 @@ if(!isset($_SESSION['current_user_id'])) {
       $perform_requests = ConcertPerformRequest::getConcertPerformRequests($concert_id);
     }
 
+    if($concert->getHostId() !== $current_user){
+      $hasSentRequest = ConcertPerformRequest::hasUserSentPerformRequest($concert_id, $current_user);
+    }
+
 	  require_once('../views/ConcertDetails.php');	
 	} else {
 		http_response_code(404);
