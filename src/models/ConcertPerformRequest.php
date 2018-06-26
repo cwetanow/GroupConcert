@@ -67,7 +67,7 @@ class ConcertPerformRequest implements \JsonSerializable
 
     public static function getConcertPerformRequests($concert_id)
     {
-        $query = (new Db())->getConn()->prepare("SELECT u.full_name, u.id, u.username FROM concert_perform_requests p JOIN users u ON p.user_id = u.id WHERE p.concert_id = '$concert_id'");
+        $query = (new Db())->getConn()->prepare("SELECT u.full_name, u.id, u.username FROM concert_perform_requests p JOIN users u ON p.user_id = u.id WHERE p.concert_id = '$concert_id' and p.status = 0");
         $query->execute();
         
         $perform_requests = [];
