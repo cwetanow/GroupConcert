@@ -26,8 +26,7 @@ if(!isset($_SESSION['current_user_id'])) {
         $performer_id = $_GET['userId'];
 
         try {
-			  $concert->selectPerformer($performer_id);
-        ConcertPerformRequest::changeStatus(ConcertPerformRequest::STATUS_ACCEPTED, $performer_id, $concert_id);
+          ConcertPerformRequest::changeStatus(ConcertPerformRequest::STATUS_REJECTED, $performer_id, $concert_id);
 
           header('Location: ./GetConcert.php?id='.$concert_id);
 				} catch (Exceprion $ex) {
