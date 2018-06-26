@@ -4,7 +4,6 @@ Startup::_init(true);
 use models\Concert;
 use models\User;
 use models\ConcertParticipant;
-use models\Error;
 
 session_start();
 
@@ -18,7 +17,8 @@ if(!isset($_SESSION['current_user_id'])) {
 	$concert = Concert::getById($concert_id);
 
 	if($concert->getTitle()) {
-    $existing_participant = ConcertParticipant::isUserParticipant($concert_id, $current_user);
+    if($concert->hasEmptySlots()){
+        $existing_participant = ConcertParticipant::isUserParticipant($concert_id, $current_user);
 
     if($existing_member->getId())
     {
@@ -29,10 +29,12 @@ if(!isset($_SESSION['current_user_id'])) {
       try {
 					$member->insert();
 
-					echo json_encode('OK');
+					header('Location: ../views/ConcertDetails.php?id='.$concert_id);
 				} catch (Exceprion $ex) {
 		      http_response_code(500);          
       	}
+      } 
+    } else {
     }
 	} else {
 		http_response_code(404);

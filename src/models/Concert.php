@@ -171,6 +171,10 @@ class Concert implements \JsonSerializable
         return $active_concerts;  
     }
 
+    public function hasEmptySlots(){
+      return ($this->getSlots() > $this->getJoinedSpots());
+    }
+
     public function getIsActive()
     {
       $current_date = date("Y-m-d h:i:sa");

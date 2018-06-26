@@ -21,6 +21,17 @@
     <?php include '../views/Header.php'?>
 
       <main role="main" class="inner cover">
+        <?php 
+                                    if($concert->hasEmptySlots())
+                                    {
+                                        echo '<form class="custom-form" method="post" action="../controllers/JoinConcert.php?id'.$concert->getId().'"><button class="btn btn-lg btn-primary btn-block" type="submit">Join</button></form>';
+                                    }
+                                    else
+                                    {
+                                        echo '<p>This concert is full.</p>';
+                                    }
+                                ?>
+        <form class="custom-form" method="post" action="../controllers/JoinConcert.php?id"><button class="btn btn-lg btn-primary btn-block" type="submit">Join</button></form>
         <header>
                                 <h1><?=$concert->getTitle()?></h1>
                                 <?php 
