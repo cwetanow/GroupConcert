@@ -21,10 +21,10 @@
     <?php include '../views/Header.php'?>
 
       <main role="main" class="inner cover">
-        <?php 
+                                <?php 
                                     if($concert->hasEmptySlots())
                                     {
-                                        echo '<form class="custom-form" method="post" action="../controllers/JoinConcert.php?id'.$concert->getId().'"><button class="btn btn-lg btn-primary btn-block" type="submit">Join</button></form>';
+                                        echo '<form class="custom-form" method="post" action="../controllers/JoinConcert.php?id='.$concert->getId().'"><button class="btn btn-lg btn-primary btn-block" type="submit">Join</button></form>';
                                     }
                                     else
                                     {
@@ -49,6 +49,21 @@
                               echo '<h3>'.$concert->getAddress().', '.$concert->getCity().'</h3>';
                               echo '<h3>By '.$concert->getHost().'</h3>';
                              ?>
+
+                              <?php 
+                                    if($concert->getPerformerId())
+                                    {
+                                        echo '<p>'.$concert->getPerformer().'</p>';
+                                    }
+                                    else if(isset($perform_requests))
+                                    {
+                                       foreach($perform_requests as $perform_request)
+                                            {
+                                             echo '<form class="custom-form" method="post" action="../controllers/ApproveRequest.php?id='.$perform_request->getConcertId().'&userId='.$perform_request->getUserId().'"><button class="btn btn-lg btn-primary btn-block" type="submit">Approve</button></form>';
+                                                      echo '<br><form class="custom-form" method="post" action="../controllers/RejectRequest.php?id='.$perform_request->getConcertId().'&userId='.$perform_request->getUserId().'"><button class="btn btn-lg btn-primary btn-block" type="submit">Reject</button></form>';
+                                            }
+                                    }
+                                ?>
       </main>
 
       <footer class="mastfoot mt-auto">
