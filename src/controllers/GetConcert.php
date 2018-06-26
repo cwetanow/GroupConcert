@@ -19,7 +19,7 @@ if(!isset($_SESSION['current_user_id'])) {
   $concert->populatePerformer();
 
 	if($concert->getTitle()) {
-    if($concert->getHostId() === $current_user)
+    if($concert->getHostId() === $current_user && !$concert->getPerformerId())
     {
       $perform_requests = ConcertPerformRequest::getConcertPerformRequests($concert_id);
     }
