@@ -41,7 +41,7 @@ CREATE TABLE comments (
 CREATE TABLE concert_perform_requests (
   user_id INT NOT NULL,
   concert_id INT NOT NULL,
-  status INT,
+  status INT DEFAULT 0,
   FOREIGN KEY (user_id) REFERENCES users(id),
   FOREIGN KEY (concert_id) REFERENCES concerts(id)
 );

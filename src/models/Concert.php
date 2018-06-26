@@ -162,6 +162,7 @@ class Concert implements \JsonSerializable
             $concert->setSpots($foundConcert['spots']);
             $concert->setId($foundConcert['id']);
             $concert->setJoinedSpots($foundConcert['joined_spots']);
+            $concert->setPerformerId($foundConcert['performer_id']);
         }
 
         return $concert;
@@ -233,7 +234,7 @@ class Concert implements \JsonSerializable
 
     public function selectPerformer($performer_id){
         $query = (new Db())->getConn()->prepare("UPDATE concerts SET performer_id=? WHERE id=?");
-        return $query->execute([$performer_id, $id]);
+        return $query->execute([$performer_id, $this->id]);
     }
 
     public function populateHost()

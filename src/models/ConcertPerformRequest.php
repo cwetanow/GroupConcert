@@ -60,7 +60,7 @@ class ConcertPerformRequest implements \JsonSerializable
 
     public function insert()
     {
-        $query = (new Db())->getConn()->prepare("INSERT INTO `concert_perform_requests` (user_id, concert_id, status) VALUES (?, ?, ?) ");
+        $query = (new Db())->getConn()->prepare("INSERT INTO `concert_perform_requests` (user_id, concert_id) VALUES (?, ?) ");
 
         return $query->execute([$this->user_id, $this->concert_id]);
     }
@@ -75,9 +75,9 @@ class ConcertPerformRequest implements \JsonSerializable
         while ($found_perform_request = $query->fetch())
         {
             $user = new User();            
-            $user->setFullName($found_participant["full_name"]);
-            $user->setUsername($found_participant["username"]);
-            $user->setId($found_participant["id"]);            
+            $user->setFullName($found_perform_request["full_name"]);
+            $user->setUsername($found_perform_request["username"]);
+            $user->setId($found_perform_request["id"]);            
             
             $perform_requests[] = $user;
         }

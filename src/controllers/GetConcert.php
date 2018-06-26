@@ -26,7 +26,7 @@ if(!isset($_SESSION['current_user_id'])) {
     }
 
     if($concert->getHostId() !== $current_user){
-      $hasSentRequest = ConcertPerformRequest::hasUserSentPerformRequest($concert_id, $current_user);
+      $hasSentRequest = !!(ConcertPerformRequest::hasUserSentPerformRequest($concert_id, $current_user)->getId());
     }
 
     $isUserParticipant = !!(ConcertParticipant::isUserParticipant($concert_id, $current_user)->getId());

@@ -21,7 +21,7 @@ if(!isset($_SESSION['current_user_id'])) {
     {
 		  http_response_code(409);
     } else {
-      $performer = ConcertPerformRequest::create($concert_id, $current_user);
+      $performer = ConcertPerformRequest::create($current_user, $concert_id);
 
       try {
 					$performer->insert();
