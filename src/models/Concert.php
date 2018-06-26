@@ -14,6 +14,8 @@ class Concert implements \JsonSerializable
     private $title;
     private $spots;
     private $joinedSpots;
+    private $performer_id;
+    private $performer;
 
     public function __construct()
     {
@@ -123,6 +125,26 @@ class Concert implements \JsonSerializable
         return $this->joinedSpots;
     }
 
+    public function setPerformer($performer)
+    {
+        $this->performer = $performer;
+    }
+
+    public function getPerformer()
+    {
+        return $this->performer;
+    }
+
+    public function setPerformerId($performer_id)
+    {
+        $this->performer_id = $performer_id;
+    }
+
+    public function getPerformerId()
+    {
+        return $this->performer_id;
+    }
+
     public function getById($id)
     {
         $query = (new Db())->getConn()->prepare("SELECT * FROM concerts WHERE id = '$id'");
@@ -208,6 +230,11 @@ class Concert implements \JsonSerializable
         return $query->execute([$this->getJoinedSpots() + 1, $id]);
     }
 
+    public function selectPerformer($performer_id){
+        $query = (new Db())->getConn()->prepare("UPDATE concerts SET performer_id=? WHERE id=?");
+        return $query->execute([$performer_id, $id]);
+    }
+
     public function populateHost()
     {
         $concert_id = $this->getId(); 
@@ -217,6 +244,17 @@ class Concert implements \JsonSerializable
 
         $current_concert = $query->fetch();
         $this->setHost($current_concert['username']);
+    }
+
+    public function populatePerformer()
+    {
+        $concert_id = $this->getId(); 
+
+        $query = (new Db())->getConn()->prepare("SELECT c.*, u.username FROM concerts c JOIN users u ON c.performer_id = u.id WHERE c.id = '$concert_id'");
+        $query->execute();
+
+        $current_concert = $query->fetch();
+        $this->setPerformer($current_concert['username']);
     }
 
     public function jsonSerialize()
