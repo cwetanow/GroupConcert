@@ -13,6 +13,7 @@ class Concert implements \JsonSerializable
     private $host;
     private $title;
     private $spots;
+    private $joinedSpots;
 
     public function __construct()
     {
@@ -112,6 +113,16 @@ class Concert implements \JsonSerializable
         return $this->spots;
     }
 
+    public function setJoinedSpots($joinedSpots)
+    {
+        $this->joinedSpots = $joinedSpots;
+    }
+
+    public function getJoinedSpots()
+    {
+        return $this->joinedSpots;
+    }
+
     public function getById($id)
     {
         $query = (new Db())->getConn()->prepare("SELECT * FROM concerts WHERE id = '$id'");
@@ -127,6 +138,7 @@ class Concert implements \JsonSerializable
             $concert->setTitle($foundConcert['title']);
             $concert->setSpots($foundConcert['spots']);
             $concert->setId($foundConcert['id']);
+            $concert->setJoinedSpots($foundConcert['joined_spots']);
         }
 
         return $concert;
@@ -149,6 +161,7 @@ class Concert implements \JsonSerializable
               $concert->setTitle($current_concert['title']);
               $concert->setCity($current_concert['city']);
               $concert->setSpots($current_concert['spots']);
+              $concert->setJoinedSpots($current_concert['joined_spots']);
 
           if($concert->getIsActive()){
               $active_concerts[] = $concert;
