@@ -18,17 +18,11 @@ CREATE TABLE concerts (
   city VARCHAR(128),
   spots INT,
   joined_spots INT DEFAULT 0,
+  performer_id INT,
   FOREIGN KEY (host_id) REFERENCES users(id)
 );
 
 CREATE TABLE concert_paticipants (
-  user_id INT NOT NULL,
-  concert_id INT NOT NULL,
-  FOREIGN KEY (user_id) REFERENCES users(id),
-  FOREIGN KEY (concert_id) REFERENCES concerts(id)
-);
-
-CREATE TABLE concert_performers (
   user_id INT NOT NULL,
   concert_id INT NOT NULL,
   FOREIGN KEY (user_id) REFERENCES users(id),
@@ -45,6 +39,7 @@ CREATE TABLE comments (
 CREATE TABLE concert_perform_requests (
   user_id INT NOT NULL,
   concert_id INT NOT NULL,
+  status INT,
   FOREIGN KEY (user_id) REFERENCES users(id),
   FOREIGN KEY (concert_id) REFERENCES concerts(id)
 );

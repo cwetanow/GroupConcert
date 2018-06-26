@@ -3,7 +3,7 @@ namespace models;
 
 use libs\Db;
 
-class Concert implements \JsonSerializable
+class ConcertParticipant implements \JsonSerializable
 {
     private $user_id;
     private $concert_id;

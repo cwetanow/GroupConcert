@@ -18,7 +18,7 @@ class User implements \JsonSerializable
         $instance = new self();
         $instance->setUsername($username);
         $instance->setPassword($password);
-		$instance->setEmail($email);
+		    $instance->setEmail($email);
         $instance->setFullName($full_name);      
         
         return $instance;
