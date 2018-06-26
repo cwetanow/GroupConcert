@@ -3,7 +3,7 @@ require_once "../libs/Startup.php";
 Startup::_init(true);
 use models\Concert;
 use models\User;
-use models\ConcertParticipant;
+use models\ConcertPerformRequest;
 
 session_start();
 
@@ -17,25 +17,19 @@ if(!isset($_SESSION['current_user_id'])) {
 	$concert = Concert::getById($concert_id);
 
 	if($concert->getTitle()) {
-    if($concert->hasEmptySlots()){
-        $existing_participant = ConcertParticipant::isUserParticipant($concert_id, $current_user);
-
-    if($existing_member->getId())
+    if($concert->getPerformerId())
     {
 		  http_response_code(409);
     } else {
-      $member = ConcertParticipant::create($concert_id, $current_user);
+      $performer = ConcertPerformRequest::create($concert_id, $current_user);
 
       try {
-					$member->insert();
-          $concert->joinPerson();
+					$performer->insert();
 
-			    header('Location: ./GetConcert.php?id='.$concert_id);
+					header('Location: ./GetConcert.php?id='.$concert_id);
 				} catch (Exceprion $ex) {
 		      http_response_code(500);          
       	}
-      } 
-    } else {
     }
 	} else {
 		http_response_code(404);
