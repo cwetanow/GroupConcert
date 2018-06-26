@@ -104,4 +104,9 @@ class ConcertPerformRequest implements \JsonSerializable
         
         return $user;
     }
+
+    public function jsonSerialize()
+    {
+        return (object) get_object_vars($this);
+    }
 }

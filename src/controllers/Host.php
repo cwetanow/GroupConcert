@@ -27,7 +27,7 @@ if (!$is_address_valid || !$is_city_valid || !$is_date_valid || !$is_title_valid
 
     try {
         $concert->insert();
-        header('Location: ../views/Concerts.php');
+        header('Location: ./GetConcert.php?id='.$concert->getId());
     } catch (Exception $ex) {
         http_response_code(500);
         header('Location: ../views/Error.php?message=Server error.&status_code=500');

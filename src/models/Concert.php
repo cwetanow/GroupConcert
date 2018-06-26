@@ -2,6 +2,7 @@
 namespace models;
 
 use libs\Db;
+use ConcertParticipant;
 
 class Concert implements \JsonSerializable
 {
@@ -194,7 +195,7 @@ class Concert implements \JsonSerializable
     }
 
     public function hasEmptySlots(){
-      return ($this->getSlots() > $this->getJoinedSpots());
+      return ($this->getSpots() > $this->getJoinedSpots());
     }
 
     public function getIsActive()
@@ -227,7 +228,7 @@ class Concert implements \JsonSerializable
 
     public function joinPerson(){
         $query = (new Db())->getConn()->prepare("UPDATE concerts SET joined_spots=? WHERE id=?");
-        return $query->execute([$this->getJoinedSpots() + 1, $id]);
+        return $query->execute([$this->getJoinedSpots() + 1, $this->id]);
     }
 
     public function selectPerformer($performer_id){

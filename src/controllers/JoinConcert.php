@@ -9,7 +9,6 @@ session_start();
 
 if(!isset($_SESSION['current_user_id'])) {
     http_response_code(401);
- 	// header('Location: ../views/Error.php?message=Only authenticated users can view project details.&status_code=401');
 } else {
 	$current_user = $_SESSION['current_user_id'];
 	
@@ -20,15 +19,15 @@ if(!isset($_SESSION['current_user_id'])) {
     if($concert->hasEmptySlots()){
         $existing_participant = ConcertParticipant::isUserParticipant($concert_id, $current_user);
 
-    if($existing_member->getId())
+    if($existing_participant->getId())
     {
 		  http_response_code(409);
     } else {
-      $member = ConcertParticipant::create($concert_id, $current_user);
+      $member = ConcertParticipant::create($current_user, $concert_id);
 
       try {
-					$member->insert();
-          $concert->joinPerson();
+				$member->insert();
+         		 $concert->joinPerson();
 
 			    header('Location: ./GetConcert.php?id='.$concert_id);
 				} catch (Exceprion $ex) {

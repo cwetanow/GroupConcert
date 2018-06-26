@@ -29,7 +29,9 @@ if(!isset($_SESSION['current_user_id'])) {
       $hasSentRequest = ConcertPerformRequest::hasUserSentPerformRequest($concert_id, $current_user);
     }
 
-    if(ConcertParticipant::isUserParticipant($concert_id, $current_user)){
+    $isUserParticipant = !!(ConcertParticipant::isUserParticipant($concert_id, $current_user)->getId());
+
+    if($isUserParticipant){
       $comments = Comment::getConcertComments($concert_id);
     }
 

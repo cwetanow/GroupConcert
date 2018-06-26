@@ -22,7 +22,7 @@ CREATE TABLE concerts (
   FOREIGN KEY (host_id) REFERENCES users(id)
 );
 
-CREATE TABLE concert_paticipants (
+CREATE TABLE concert_participants (
   user_id INT NOT NULL,
   concert_id INT NOT NULL,
   FOREIGN KEY (user_id) REFERENCES users(id),

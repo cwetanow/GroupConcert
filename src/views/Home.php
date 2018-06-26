@@ -21,7 +21,6 @@
 include('./Header.php')?>
 
       <main role="main" class="inner cover">
-        
       </main>
 
       <footer class="mastfoot mt-auto">

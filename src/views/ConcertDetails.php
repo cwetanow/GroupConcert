@@ -22,14 +22,15 @@
 
       <main role="main" class="inner cover">
                                 <?php 
-                                    if($concert->hasEmptySlots())
+                                if($current_user !== $concert->getHostId() && !$isUserParticipant)
+                                    {if($concert->hasEmptySlots())
                                     {
                                         echo '<form class="custom-form" method="post" action="../controllers/JoinConcert.php?id='.$concert->getId().'"><button class="btn btn-lg btn-primary btn-block" type="submit">Join</button></form>';
                                     }
                                     else
                                     {
                                         echo '<p>This concert is full.</p>';
-                                    }
+                                    }}
                                 ?>
                           <header>
                                 <h1><?=$concert->getTitle()?></h1>
@@ -37,6 +38,7 @@
                                     if($concert->getIsActive())
                                     {
                                         echo '<p>'.date('l, jS \of F, Y h:i:s A', strtotime($concert->getDate())).'</p>';
+                                        echo '<p>'.$concert->getJoinedSpots()."/".$concert->getSpots().'</p>';
                                     }
                                     else
                                     {

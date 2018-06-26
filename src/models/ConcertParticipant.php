@@ -44,7 +44,7 @@ class ConcertParticipant implements \JsonSerializable
 
     public function insert()
     {
-        $query = (new Db())->getConn()->prepare("INSERT INTO `concert_paticipants` (user_id, concert_id) VALUES (?, ?) ");
+        $query = (new Db())->getConn()->prepare("INSERT INTO `concert_participants` (user_id, concert_id) VALUES (?, ?) ");
 
         return $query->execute([$this->user_id, $this->concert_id]);
     }
@@ -80,5 +80,10 @@ class ConcertParticipant implements \JsonSerializable
         }
         
         return $user;
+    }
+
+    public function jsonSerialize()
+    {
+        return (object) get_object_vars($this);
     }
 }
