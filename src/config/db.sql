@@ -17,6 +17,7 @@ CREATE TABLE concerts (
   title VARCHAR(128),
   city VARCHAR(128),
   spots INT,
+  joinedSpots INT DEFAULT 0,
   FOREIGN KEY (host_id) REFERENCES users(id)
 );
 
