@@ -85,6 +85,12 @@ class ConcertPerformRequest implements \JsonSerializable
         return $perform_requests;
     } 
 
+    public function changeStatus($status){
+        $query = (new Db())->getConn()->prepare("UPDATE concert_perform_requests SET status=? WHERE user_id=? AND concert_id=?");
+
+        return $query->execute([$status, $this->user_id, $this->concert_id]);
+    }
+
     public static function hasUserSentPerformRequest($concert_id, $user_id)
     {      
         $query = (new Db())->getConn()->prepare("SELECT u.full_name, u.id, u.username FROM concert_perform_requests p JOIN users u ON p.user_id = u.id WHERE p.concert_id = '$concert_id' AND p.user_id = '$user_id'");
