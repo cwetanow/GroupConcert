@@ -203,6 +203,11 @@ class Concert implements \JsonSerializable
         return $query->execute([$title, $date, $address, $city, $spots, $id]);
     }
 
+    public function joinPerson(){
+        $query = (new Db())->getConn()->prepare("UPDATE concerts SET joined_spots=? WHERE id=?");
+        return $query->execute([$this->getJoinedSpots() + 1, $id]);
+    }
+
     public function populateHost()
     {
         $concert_id = $this->getId(); 

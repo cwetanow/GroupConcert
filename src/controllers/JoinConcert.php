@@ -28,6 +28,7 @@ if(!isset($_SESSION['current_user_id'])) {
 
       try {
 					$member->insert();
+          $concert->joinPerson();
 
 					header('Location: ../views/ConcertDetails.php?id='.$concert_id);
 				} catch (Exceprion $ex) {
