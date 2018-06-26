@@ -31,8 +31,7 @@
                                         echo '<p>This concert is full.</p>';
                                     }
                                 ?>
-        <form class="custom-form" method="post" action="../controllers/JoinConcert.php?id"><button class="btn btn-lg btn-primary btn-block" type="submit">Join</button></form>
-        <header>
+                          <header>
                                 <h1><?=$concert->getTitle()?></h1>
                                 <?php 
                                     if($concert->getIsActive())
