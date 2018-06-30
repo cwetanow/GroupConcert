@@ -75,7 +75,7 @@
                                       }
                                 ?>
 
-                      <table class="table">
+                    <?php if(!$concert->getPerformerId() ) : ?>  <table class="table">
                       <thead>
                   <tr>
                     <th>Perform requests</th>
@@ -95,7 +95,7 @@
                                     }
                                 ?>
                           </tbody>
-                      </table>
+                      </table><?php endif; ?>
       </main>
 
      
