@@ -22,15 +22,18 @@
 
       <main role="main" class="inner cover">
                                 <?php 
-                                if(isset($current_user) && $current_user !== $concert->getHostId() && !$isUserParticipant)
-                                    {if($concert->hasEmptySlots())
+                                if(isset($current_user) && $current_user !== $concert->getHostId())
+                                    {
+                                        if($concert->hasEmptySlots() && !$isUserParticipant)
                                     {
                                         if(isset($hasSentRequest) && !$hasSentRequest){
                                         echo '<form class="custom-form float-right" method="post" action="../controllers/JoinConcert.php?id='.$concert->getId().'"><button class="btn btn-lg btn-primary btn-block" type="submit">Join</button></form>';
-                                    } else {
-                                        echo '<p>You have sent a request to perform to this concert.</p>';
-                                        
-                                    }}
+                                    } 
+                                }
+                                    else if($isUserParticipant)
+                                    {
+                                        echo '<p>You have joined this concert.</p>';
+                                    }
                                     else
                                     {
                                         echo '<p>This concert is full.</p>';
@@ -60,7 +63,7 @@
                                <p class="lead mb-0">  <?php 
                               if($concert->getPerformerId())
                               {
-                                  echo '<p>'.$concert->getPerformer().'</p>';
+                                  echo '<p>'.$concert->getPerformer().' is performing</p>';
                               } else {
                                   echo '<p>Performer not selected</p>';                                        
                               }
@@ -68,11 +71,12 @@
         </div>
       </div>
                                     <?php 
-                                 
-                                    
                                     if(isset($hasSentRequest) && !$hasSentRequest && !$isUserParticipant){
                                         echo '<form class="custom-form float-right" method="post" action="../controllers/PostPerformRequest.php?id='.$concert->getId().'"><button class="btn btn-lg btn-primary btn-block" type="submit">Perform</button></form>';
-                                      }
+                                      } else if($current_user === $concert->getPerformerId()){ 
+                                        echo '<p>You are performing at this concert.</p>'; 
+                                         
+                                    } 
                                 ?>
 
                     <?php if(!$concert->getPerformerId() ) : ?>  <table class="table">
