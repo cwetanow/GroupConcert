@@ -1,4 +1,4 @@
-<header class="masthead mb-auto">
+<header class="masthead">
         <div class="inner">
           <h3 class="masthead-brand">Group Concert</h3>
           <nav class="nav nav-masthead justify-content-center">
