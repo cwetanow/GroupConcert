@@ -9,10 +9,6 @@ use models\Comment;
 
 session_start();
 
-if(!isset($_SESSION['current_user_id'])) {
-    http_response_code(401);
-} else {
-	$current_user = $_SESSION['current_user_id'];
 	
 	$concert_id = $_GET['id'];
 	$concert = Concert::getById($concert_id);
@@ -20,7 +16,10 @@ if(!isset($_SESSION['current_user_id'])) {
   $concert->populatePerformer();
 
 	if($concert->getTitle()) {
-    if($concert->getHostId() === $current_user && !$concert->getPerformerId())
+    if(isset($_SESSION['current_user_id'])) {
+	$current_user = $_SESSION['current_user_id'];  
+    
+      if($concert->getHostId() === $current_user && !$concert->getPerformerId())
     {
       $perform_requests = ConcertPerformRequest::getConcertPerformRequests($concert_id);
     }
@@ -33,11 +32,10 @@ if(!isset($_SESSION['current_user_id'])) {
 
     if($isUserParticipant){
       $comments = Comment::getConcertComments($concert_id);
-    }
+    }}
 
 	  require_once('../views/ConcertDetails.php');	
 	} else {
 		http_response_code(404);
 	}
-}
 ?>

@@ -22,7 +22,7 @@
 
       <main role="main" class="inner cover">
                                 <?php 
-                                if($current_user !== $concert->getHostId() && !$isUserParticipant)
+                                if(isset($current_user) && $current_user !== $concert->getHostId() && !$isUserParticipant)
                                     {if($concert->hasEmptySlots())
                                     {
                                         echo '<form class="custom-form" method="post" action="../controllers/JoinConcert.php?id='.$concert->getId().'"><button class="btn btn-lg btn-primary btn-block" type="submit">Join</button></form>';
@@ -53,14 +53,13 @@
                              ?>
 
                               <?php 
-                              echo !!$concert->getPerformerId();
                                    if($concert->getPerformerId())
                                     {
                                         echo '<p>'.$concert->getPerformer().'</p>';
                                     }
                                     else if(isset($perform_requests))
                                     {
-                                        echo 'Performers';
+                                        echo 'Perform requests';
                                         foreach($perform_requests as $perform_request)
                                             {
                                              echo '<form class="custom-form" method="post" action="../controllers/ApproveRequest.php?id='.$concert->getId().'&userId='.$perform_request->getId().'"><button class="btn btn-lg btn-primary btn-block" type="submit">Approve</button></form>';
