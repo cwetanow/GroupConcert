@@ -9,7 +9,7 @@
               echo '<a class="nav-link" href="../controllers/Logout.php">Logout</a>';
              } else{
               echo '<a class="nav-link" href="../views/Register.php">Register</a>';
-              echo '<a class="nav-link" href="../views//Login.php">Login</a>';
+              echo '<a class="nav-link" href="../views/Login.php">Login</a>';
             }
           ?>
           </nav>
