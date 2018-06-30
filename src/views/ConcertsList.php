@@ -31,7 +31,7 @@
  <?php
                                         if(count($active_concerts) <= 0)
                                         {
-                                            echo '<li>There are no active concerts.</li>';
+                                            echo 'There are no active concerts.';
                                         }
                                         else 
                                         {
