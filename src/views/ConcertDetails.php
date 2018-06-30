@@ -63,16 +63,17 @@ if ($concert->getPerformerId()) {
         </div>
       </div>
                                     <?php
-if (isset($hasSentRequest) && !$hasSentRequest && !$isUserParticipant) {
+if (!$concert->getPerformerId() && isset($hasSentRequest) && !$hasSentRequest && !$isUserParticipant) {
     echo '<form class="custom-form float-right" method="post" action="../controllers/PostPerformRequest.php?id=' . $concert->getId() . '"><button class="btn btn-lg btn-primary btn-block" type="submit">Perform</button></form>';
 } else if ($current_user === $concert->getPerformerId()) {
     echo '<p>You are performing at this concert.</p>';
-    
+} else if (isset($hasSentRequest) && $hasSentRequest){
+    echo '<p>You have sent a request to perform at this concert.</p>';
 }
 ?>
 
                     <?php
-if (!$concert->getPerformerId()):
+if (!$concert->getPerformerId() && isset($current_user) && $current_user === $concert->getHostId()):
 ?>  <table class="table">
                       <thead>
                   <tr>
