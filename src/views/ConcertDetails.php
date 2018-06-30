@@ -25,16 +25,23 @@
                                 if(isset($current_user) && $current_user !== $concert->getHostId() && !$isUserParticipant)
                                     {if($concert->hasEmptySlots())
                                     {
-                                        echo '<form class="custom-form" method="post" action="../controllers/JoinConcert.php?id='.$concert->getId().'"><button class="btn btn-lg btn-primary btn-block" type="submit">Join</button></form>';
-                                    }
+                                        if(isset($hasSentRequest) && !$hasSentRequest){
+                                        echo '<form class="custom-form float-right" method="post" action="../controllers/JoinConcert.php?id='.$concert->getId().'"><button class="btn btn-lg btn-primary btn-block" type="submit">Join</button></form>';
+                                    } else {
+                                        echo '<p>You have sent a request to perform to this concert.</p>';
+                                        
+                                    }}
                                     else
                                     {
                                         echo '<p>This concert is full.</p>';
-                                    }}
+                                    }
+                                }
                                 ?>
-                          <header>
-                                <h1><?=$concert->getTitle()?></h1>
-                                <?php 
+
+                                <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
+        <div class="col-md-6 px-0">
+          <h1 class="display-4 font-italic"><?=$concert->getTitle()?></h1>
+          <p class="lead my-3"> <?php 
                                     if($concert->getIsActive())
                                     {
                                         echo '<p>'.date('l, jS \of F, Y h:i:s A', strtotime($concert->getDate())).'</p>';
@@ -44,13 +51,19 @@
                                     {
                                         echo '<p>This concert has finished.</p>';
                                     }
-                                ?>
-                            </header>
-
-                             <?php 
+                                ?></p>
+          <p class="lead mb-0">  <?php 
                               echo '<h3>'.$concert->getAddress().', '.$concert->getCity().'</h3>';
                               echo '<h3>By '.$concert->getHost().'</h3>';
-                             ?>
+                             ?></p>
+        </div>
+      </div>
+                          <header>
+                                <h1></h1>
+                               
+                            </header>
+
+                           
 
                               <?php 
                                    if($concert->getPerformerId())
@@ -65,9 +78,9 @@
                                              echo '<form class="custom-form" method="post" action="../controllers/ApproveRequest.php?id='.$concert->getId().'&userId='.$perform_request->getId().'"><button class="btn btn-lg btn-primary btn-block" type="submit">Approve</button></form>';
                                                       echo '<br><form class="custom-form" method="post" action="../controllers/RejectRequest.php?id='.$concert->getId().'&userId='.$perform_request->getId().'"><button class="btn btn-lg btn-primary btn-block" type="submit">Reject</button></form>';
                                             }
-                                    } else if(isset($hasSentRequest) && !$hasSentRequest){
-                                      echo '<form class="custom-form" method="post" action="../controllers/PostPerformRequest.php?id='.$concert->getId().'"><button class="btn btn-lg btn-primary btn-block" type="submit">Perform</button></form>';
-                                    }
+                                    } else if(isset($hasSentRequest) && !$hasSentRequest && !$isUserParticipant){
+                                        echo '<form class="custom-form float-right" method="post" action="../controllers/PostPerformRequest.php?id='.$concert->getId().'"><button class="btn btn-lg btn-primary btn-block" type="submit">Perform</button></form>';
+                                      }
                                 ?>
       </main>
 
