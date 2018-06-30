@@ -56,33 +56,49 @@
                               echo '<h3>'.$concert->getAddress().', '.$concert->getCity().'</h3>';
                               echo '<h3>By '.$concert->getHost().'</h3>';
                              ?></p>
+
+                               <p class="lead mb-0">  <?php 
+                              if($concert->getPerformerId())
+                              {
+                                  echo '<p>'.$concert->getPerformer().'</p>';
+                              } else {
+                                  echo '<p>Performer not selected</p>';                                        
+                              }
+                             ?></p>
         </div>
       </div>
-                          <header>
-                                <h1></h1>
-                               
-                            </header>
-
-                           
-
-                              <?php 
-                                   if($concert->getPerformerId())
-                                    {
-                                        echo '<p>'.$concert->getPerformer().'</p>';
-                                    }
-                                    else if(isset($perform_requests))
-                                    {
-                                        echo 'Perform requests';
-                                        foreach($perform_requests as $perform_request)
-                                            {
-                                             echo '<form class="custom-form" method="post" action="../controllers/ApproveRequest.php?id='.$concert->getId().'&userId='.$perform_request->getId().'"><button class="btn btn-lg btn-primary btn-block" type="submit">Approve</button></form>';
-                                                      echo '<br><form class="custom-form" method="post" action="../controllers/RejectRequest.php?id='.$concert->getId().'&userId='.$perform_request->getId().'"><button class="btn btn-lg btn-primary btn-block" type="submit">Reject</button></form>';
-                                            }
-                                    } else if(isset($hasSentRequest) && !$hasSentRequest && !$isUserParticipant){
+                                    <?php 
+                                 
+                                    
+                                    if(isset($hasSentRequest) && !$hasSentRequest && !$isUserParticipant){
                                         echo '<form class="custom-form float-right" method="post" action="../controllers/PostPerformRequest.php?id='.$concert->getId().'"><button class="btn btn-lg btn-primary btn-block" type="submit">Perform</button></form>';
                                       }
                                 ?>
+
+                      <table class="table">
+                      <thead>
+                  <tr>
+                    <th>Perform requests</th>
+                    <th></th>
+                    <th></th>
+                  </tr>
+                </thead>
+                          <tbody>
+                          <?php 
+                                if(!$concert->getPerformerId() && isset($perform_requests))
+                                {
+                                foreach($perform_requests as $perform_request)
+                                            {
+                                             echo '<tr><td>'.$perform_request->getUsername().'</td><td><form method="post" action="../controllers/ApproveRequest.php?id='.$concert->getId().'&userId='.$perform_request->getId().'"><button class="btn btn-sm btn-primary btn-block" type="submit">Approve</button></form></td>';
+                                                      echo '<td><form method="post" action="../controllers/RejectRequest.php?id='.$concert->getId().'&userId='.$perform_request->getId().'"><button class="btn btn-sm btn-primary btn-block" type="submit">Reject</button></form></td></tr>';
+                                            }
+                                    }
+                                ?>
+                          </tbody>
+                      </table>
       </main>
+
+     
 
       <footer class="mastfoot mt-auto">
         <div class="inner">
