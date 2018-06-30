@@ -18,68 +18,62 @@
   <body class="text-center">
 
     <div class="container d-flex w-100 h-100 p-3 mx-auto flex-column">
-    <?php include '../views/Header.php'?>
+    <?php
+include '../views/Header.php';
+?>
 
       <main role="main" class="inner cover">
-                                <?php 
-                                if(isset($current_user) && $current_user !== $concert->getHostId())
-                                    {
-                                        if($concert->hasEmptySlots() && !$isUserParticipant)
-                                    {
-                                        if(isset($hasSentRequest) && !$hasSentRequest){
-                                        echo '<form class="custom-form float-right" method="post" action="../controllers/JoinConcert.php?id='.$concert->getId().'"><button class="btn btn-lg btn-primary btn-block" type="submit">Join</button></form>';
-                                    } 
-                                }
-                                    else if($isUserParticipant)
-                                    {
-                                        echo '<p>You have joined this concert.</p>';
-                                    }
-                                    else
-                                    {
-                                        echo '<p>This concert is full.</p>';
-                                    }
-                                }
-                                ?>
+                                <?php
+if (isset($current_user) && $current_user !== $concert->getHostId()) {
+    if ($concert->hasEmptySlots() && !$isUserParticipant) {
+        if (isset($hasSentRequest) && !$hasSentRequest) {
+            echo '<form class="custom-form float-right" method="post" action="../controllers/JoinConcert.php?id=' . $concert->getId() . '"><button class="btn btn-lg btn-primary btn-block" type="submit">Join</button></form>';
+        }
+    } else if ($isUserParticipant) {
+        echo '<p>You have joined this concert.</p>';
+    } else {
+        echo '<p>This concert is full.</p>';
+    }
+}
+?>
 
                                 <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
         <div class="col-md-6 px-0">
-          <h1 class="display-4 font-italic"><?=$concert->getTitle()?></h1>
-          <p class="lead my-3"> <?php 
-                                    if($concert->getIsActive())
-                                    {
-                                        echo '<p>'.date('l, jS \of F, Y h:i:s A', strtotime($concert->getDate())).'</p>';
-                                        echo '<p>'.$concert->getJoinedSpots()."/".$concert->getSpots().'</p>';
-                                    }
-                                    else
-                                    {
-                                        echo '<p>This concert has finished.</p>';
-                                    }
-                                ?></p>
-          <p class="lead mb-0">  <?php 
-                              echo '<h3>'.$concert->getAddress().', '.$concert->getCity().'</h3>';
-                              echo '<h3>By '.$concert->getHost().'</h3>';
-                             ?></p>
+          <h1 class="display-4 font-italic"><?= $concert->getTitle() ?></h1>
+          <p class="lead my-3"> <?php
+if ($concert->getIsActive()) {
+    echo '<p>' . date('l, jS \of F, Y h:i:s A', strtotime($concert->getDate())) . '</p>';
+    echo '<p>' . $concert->getJoinedSpots() . "/" . $concert->getSpots() . '</p>';
+} else {
+    echo '<p>This concert has finished.</p>';
+}
+?></p>
+          <p class="lead mb-0">  <?php
+echo '<h3>' . $concert->getAddress() . ', ' . $concert->getCity() . '</h3>';
+echo '<h3>By ' . $concert->getHost() . '</h3>';
+?></p>
 
-                               <p class="lead mb-0">  <?php 
-                              if($concert->getPerformerId())
-                              {
-                                  echo '<p>'.$concert->getPerformer().' is performing</p>';
-                              } else {
-                                  echo '<p>Performer not selected</p>';                                        
-                              }
-                             ?></p>
+                               <p class="lead mb-0">  <?php
+if ($concert->getPerformerId()) {
+    echo '<p>' . $concert->getPerformer() . ' is performing</p>';
+} else {
+    echo '<p>Performer not selected</p>';
+}
+?></p>
         </div>
       </div>
-                                    <?php 
-                                    if(isset($hasSentRequest) && !$hasSentRequest && !$isUserParticipant){
-                                        echo '<form class="custom-form float-right" method="post" action="../controllers/PostPerformRequest.php?id='.$concert->getId().'"><button class="btn btn-lg btn-primary btn-block" type="submit">Perform</button></form>';
-                                      } else if($current_user === $concert->getPerformerId()){ 
-                                        echo '<p>You are performing at this concert.</p>'; 
-                                         
-                                    } 
-                                ?>
+                                    <?php
+if (isset($hasSentRequest) && !$hasSentRequest && !$isUserParticipant) {
+    echo '<form class="custom-form float-right" method="post" action="../controllers/PostPerformRequest.php?id=' . $concert->getId() . '"><button class="btn btn-lg btn-primary btn-block" type="submit">Perform</button></form>';
+} else if ($current_user === $concert->getPerformerId()) {
+    echo '<p>You are performing at this concert.</p>';
+    
+}
+?>
 
-                    <?php if(!$concert->getPerformerId() ) : ?>  <table class="table">
+                    <?php
+if (!$concert->getPerformerId()):
+?>  <table class="table">
                       <thead>
                   <tr>
                     <th>Perform requests</th>
@@ -88,21 +82,21 @@
                   </tr>
                 </thead>
                           <tbody>
-                          <?php 
-                                if(!$concert->getPerformerId() && isset($perform_requests))
-                                {
-                                foreach($perform_requests as $perform_request)
-                                            {
-                                             echo '<tr><td>'.$perform_request->getUsername().'</td><td><form method="post" action="../controllers/ApproveRequest.php?id='.$concert->getId().'&userId='.$perform_request->getId().'"><button class="btn btn-sm btn-primary btn-block" type="submit">Approve</button></form></td>';
-                                                      echo '<td><form method="post" action="../controllers/RejectRequest.php?id='.$concert->getId().'&userId='.$perform_request->getId().'"><button class="btn btn-sm btn-primary btn-block" type="submit">Reject</button></form></td></tr>';
-                                            }
-                                    }
-                                ?>
-                          </tbody>
-                      </table><?php endif; ?>
-      </main>
+                          <?php
+    if (!$concert->getPerformerId() && isset($perform_requests)) {
+        foreach ($perform_requests as $perform_request) {
+            echo '<tr><td>' . $perform_request->getUsername() . '</td><td><form method="post" action="../controllers/ApproveRequest.php?id=' . $concert->getId() . '&userId=' . $perform_request->getId() . '"><button class="btn btn-sm btn-primary btn-block" type="submit">Approve</button></form></td>';
+            echo '<td><form method="post" action="../controllers/RejectRequest.php?id=' . $concert->getId() . '&userId=' . $perform_request->getId() . '"><button class="btn btn-sm btn-primary btn-block" type="submit">Reject</button></form></td></tr>';
+        }
+    }
+?>
+                         </tbody>
+                      </table><?php
+endif;
+?>
+     </main>
 
-     
+    
 
       <footer class="mastfoot mt-auto">
         <div class="inner">
