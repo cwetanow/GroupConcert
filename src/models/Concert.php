@@ -170,7 +170,7 @@ class Concert implements \JsonSerializable
 
     public function getAllConcerts()
     {
-        $query = (new Db())->getConn()->prepare("SELECT * FROM concerts");
+        $query = (new Db())->getConn()->prepare("SELECT * FROM concerts ORDER BY start_date");
         $query->execute();
 
         $active_concerts = [];

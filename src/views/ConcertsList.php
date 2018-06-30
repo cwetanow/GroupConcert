@@ -27,7 +27,6 @@
     <?php include '../views/Header.php'?>
 
       <main role="main" class="inner cover">
-<ul class="list-group">
  <?php
                                         if(count($active_concerts) <= 0)
                                         {
@@ -37,11 +36,10 @@
                                         {
                                             foreach($active_concerts as $concert)
                                             {
-                                             echo '<div class="card" style="width: 33rem;"><div class="card-body"><h5 class="card-title"><a href="./GetConcert.php?id='.$concert->getId().'">'.$concert->getTitle().'</a></h5><h6 class="card-subtitle mb-2 text-muted">'.date('l, jS \of F, Y h:i:s A', strtotime($concert->getDate())).'</h6><p class="card-link">'.$concert->getAddress().', '.$concert->getCity().'</p></div></div><br>';
+                                             echo '<div class="card"><div class="card-body"><h5 class="card-title"><a href="./GetConcert.php?id='.$concert->getId().'">'.$concert->getTitle().'</a></h5><h6 class="card-subtitle mb-2 text-muted">'.date('l, jS \of F, Y h:i:s A', strtotime($concert->getDate())).'</h6><p class="card-link">'.$concert->getAddress().', '.$concert->getCity().'</p></div></div><br>';
                                             }
                                         }
                                     ?>
-</ul>
       </main>
 
       <footer class="mastfoot mt-auto">
