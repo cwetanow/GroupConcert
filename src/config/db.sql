@@ -35,7 +35,8 @@ CREATE TABLE comments (
   comment_date DATE,
   user_id INT NOT NULL,
   comment_text VARCHAR(500),
-  FOREIGN KEY (user_id) REFERENCES users(id)
+  FOREIGN KEY (user_id) REFERENCES users(id),
+  FOREIGN KEY (concert_id) REFERENCES concerts(id)
 );
 
 CREATE TABLE concert_perform_requests (
