@@ -113,6 +113,24 @@ class User implements \JsonSerializable
         return $user;
     }
 
+    public function getById($id)
+    {
+        $query = (new Db())->getConn()->prepare("SELECT * FROM users WHERE id = '$id'");
+        $query->execute();
+
+        $concert = new Concert();
+
+        $user = new User();
+        while ($found_user = $query->fetch())
+        {
+            $user->setUsername($found_user['username']);
+            $user->setFullName($found_user['full_name']);
+            $user->setId($found_user['id']);
+        }
+
+        return $user;
+    }
+
     public function getUsersByUsernamePattern($username_pattern) {
         $query = (new Db())->getConn()->prepare("SELECT * FROM users WHERE username LIKE '$username_pattern%'");
         $query->execute();
