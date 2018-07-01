@@ -6,7 +6,6 @@ use libs\Db;
 class Comment implements \JsonSerializable
 {
     private $id;
-    private $comment_date;
     private $user_id;
     private $comment_text;
     private $concert_id;
@@ -18,10 +17,9 @@ class Comment implements \JsonSerializable
 
     }
 
-    public static function create($comment_date, $user_id, $comment_text, $concert_id)
+    public static function create($user_id, $comment_text, $concert_id)
     {
         $instance = new self();
-        $instance->setCommentDate($comment_date);
         $instance->setCommentText($comment_text);
         $instance->setUserId($user_id);
         $instance->setConcertId($concert_id);
@@ -47,16 +45,6 @@ class Comment implements \JsonSerializable
     public function getConcertId()
     {
         return $this->concert_id;
-    }
-
-    public function setCommentDate($comment_date)
-    {
-        $this->comment_date = $comment_date;
-    }
-
-    public function getCommentDate()
-    {
-        return $this->comment_date;
     }
 
     public function setUserId($user_id)
@@ -91,9 +79,9 @@ class Comment implements \JsonSerializable
 
     public function insert()
     {
-        $query = (new Db())->getConn()->prepare("INSERT INTO `comments` (comment_date, user_id, comment_text, concert_id) VALUES (?, ?, ?, ?)");
+        $query = (new Db())->getConn()->prepare("INSERT INTO `comments` (user_id, comment_text, concert_id) VALUES (?, ?, ?)");
 
-        return $query->execute([$this->comment_date, $this->user_id, $this->comment_text, $this->concert_id]);
+        return $query->execute([$this->user_id, $this->comment_text, $this->concert_id]);
     }
 
     public static function delete($comment_id)
@@ -105,7 +93,7 @@ class Comment implements \JsonSerializable
 
     public static function getConcertComments($concert_id)
     {
-        $query = (new Db())->getConn()->prepare("SELECT u.username, c.id, c.concert_id, c.comment_date, c.user_id, c.comment_text FROM comments c JOIN users u ON c.user_id = u.id WHERE c.concert_id = '$concert_id' ORDER BY c.comment_date");
+        $query = (new Db())->getConn()->prepare("SELECT u.username, c.id, c.concert_id, c.user_id, c.comment_text FROM comments c JOIN users u ON c.user_id = u.id WHERE c.concert_id = '$concert_id' ORDER BY c.id");
         
         $query->execute();
         
@@ -114,12 +102,11 @@ class Comment implements \JsonSerializable
         while ($found_comment = $query->fetch())
         {
             $comment =  new Comment();
-            $concert->setId($current_concert['id']);
-            $concert->setUser($current_concert['username']);
-            $concert->setConcertId($current_concert['concert_id']);
-            $concert->setCommentDate($current_concert['comment_date']);
-            $concert->setUserId($current_concert['user_id']);
-            $concert->setCommentText($current_concert['comment_text']);
+            $comment->setId($found_comment['id']);
+            $comment->setUser($found_comment['username']);
+            $comment->setConcertId($found_comment['concert_id']);
+            $comment->setUserId($found_comment['user_id']);
+            $comment->setCommentText($found_comment['comment_text']);
 
             $comments[] = $comment;
         }

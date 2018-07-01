@@ -32,7 +32,6 @@ CREATE TABLE concert_participants (
 CREATE TABLE comments (
   id INT AUTO_INCREMENT PRIMARY KEY,
   concert_id INT NOT NULL,
-  comment_date DATE,
   user_id INT NOT NULL,
   comment_text VARCHAR(500),
   FOREIGN KEY (user_id) REFERENCES users(id),
