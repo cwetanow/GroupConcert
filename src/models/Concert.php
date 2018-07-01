@@ -195,6 +195,33 @@ class Concert implements \JsonSerializable
         return $active_concerts;  
     }
 
+    public function getUserConcerts($user_id)
+    {
+        $query = (new Db())->getConn()->prepare("SELECT * FROM concerts WHERE host_id = '$user_id' ORDER BY start_date");
+        $query->execute();
+
+        $active_concerts = [];
+        while ($current_concert = $query->fetch())
+        {
+          $current_date = date("Y-m-d h:i:sa");
+
+              $concert =  new Concert();
+              $concert->setId($current_concert['id']);
+              $concert->setDate($current_concert['start_date']);
+              $concert->setAddress($current_concert['address']);
+              $concert->setTitle($current_concert['title']);
+              $concert->setCity($current_concert['city']);
+              $concert->setSpots($current_concert['spots']);
+              $concert->setJoinedSpots($current_concert['joined_spots']);
+
+          if($concert->getIsActive()){
+              $active_concerts[] = $concert;
+          }           
+        }
+
+        return $active_concerts;  
+    }
+
     public function hasEmptySlots(){
       return ($this->getSpots() > $this->getJoinedSpots());
     }
