@@ -30,7 +30,7 @@ session_start();
 
     $isUserParticipant = !!(ConcertParticipant::isUserParticipant($concert_id, $current_user)->getId());
 
-    if($isUserParticipant){
+    if($isUserParticipant || $concert->getHostId() === $current_user){
       $comments = Comment::getConcertComments($concert_id);
     }}
 

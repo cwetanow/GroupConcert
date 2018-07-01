@@ -95,9 +95,32 @@ if (!$concert->getPerformerId() && isset($current_user) && $current_user === $co
                       </table><?php
 endif;
 ?>
-     </main>
 
-    
+ <?php
+if (isset($current_user) && ($current_user === $concert->getHostId() || $isUserParticipant)):
+?>
+<div id="comments">
+    <div class="card my-4">
+            <h5 class="card-header">Leave a Comment:</h5>
+            <div class="card-body">
+            <?php
+  echo ' <form method="post" action="../controllers/PostComment.php?id='.$concert->getId().'"><div class="form-group"><textarea class="form-control" id="comment_text" name="comment_text" required rows="3"></textarea></div><button type="submit" class="btn btn-primary">Submit</button></form>';
+?>
+             
+            </div>
+          </div>
+
+                <?php
+    if (isset($comments)) {
+        foreach ($comments as $comment) {
+         echo '<div class="media mb-4"><div class="media-body"><h5 class="mt-0">'.$comment->getUser().'</h5>'.$comment->getCommentText().'</div></div>';  
+        }
+    }
+?></div><?php
+endif;
+?>
+     </main>
+ 
 
       <footer class="mastfoot mt-auto">
         <div class="inner">

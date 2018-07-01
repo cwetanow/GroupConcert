@@ -101,3 +101,12 @@ body {
   border-bottom-left-radius: 0;
   margin-bottom: 2px;
 }
+
+#comments {
+  margin: 0 10%;
+  text-align: left;
+}
+
+#comments .card h5 {
+  color: #343a40;
+}
