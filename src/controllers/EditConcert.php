@@ -24,7 +24,7 @@ if(!isset($_SESSION['current_user_id'])) {
     $is_title_valid = Validator::exists($title);
     
 if (!$is_address_valid || !$is_city_valid || !$is_date_valid || !$is_title_valid) {
-    header('Location: ../views/Edit.php?address=' . json_encode($is_address_valid) . '&city=' . json_encode($is_city_valid) . '&date=' . json_encode($is_date_valid) . '&title=' . json_encode($is_title_valid));
+    header('Location: ../views/EditConcert.php?address=' . json_encode($is_address_valid) . '&city=' . json_encode($is_city_valid) . '&date=' . json_encode($is_date_valid) . '&title=' . json_encode($is_title_valid));
 } else {
         $concert = Concert::getById($id);
 
@@ -36,7 +36,7 @@ if (!$is_address_valid || !$is_city_valid || !$is_date_valid || !$is_title_valid
           }  
         } else {
           http_response_code(401);
-        }        
+        }
     }
 }
 ?> 

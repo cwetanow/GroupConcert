@@ -9,6 +9,8 @@ session_start();
 
 if (!isset($_SESSION['current_user_id'])) {
     http_response_code(401);
+    header('Location: ../views/Error.php?message=Only authenticated users can join concert.&status_code=401');
+    
 } else {
     $current_user = $_SESSION['current_user_id'];
     
@@ -38,6 +40,7 @@ if (!isset($_SESSION['current_user_id'])) {
         }
     } else {
         http_response_code(404);
+        header('Location: ../views/Error.php?message=Concert not found.&status_code=404');
     }
 }
 ?> 

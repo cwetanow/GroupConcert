@@ -9,7 +9,8 @@ session_start();
 
 if(!isset($_SESSION['current_user_id'])) {
     http_response_code(401);
- 	// header('Location: ../views/Error.php?message=Only authenticated users can view project details.&status_code=401');
+		header('Location: ../views/Error.php?message=Only concert host can edit.&status_code=401');
+
 } else {
 	$current_user = $_SESSION['current_user_id'];
 	
@@ -21,7 +22,7 @@ if(!isset($_SESSION['current_user_id'])) {
 	  require_once('../views/EditConcert.php');	
 	} else {
 		http_response_code(404);
- 		// header('Location: ../views/Error.php?message=Project was not found.&status_code=404');
+		header('Location: ../views/Error.php?message=Concert not found.&status_code=401');
 	}
   } else {
     http_response_code(401);

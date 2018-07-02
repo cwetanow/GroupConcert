@@ -18,8 +18,7 @@
   <body class="text-center">
 
     <div class="container d-flex w-100 h-100 p-3 mx-auto flex-column">
-    <?php session_start();
-include './Header.php'?>
+    <?php include '../views/Header.php'?>
 
       <main role="main" class="inner cover">
       <form class="custom-form" method="post" action="../controllers/EditConcert.php">
@@ -44,13 +43,12 @@ include './Header.php'?>
                                                 Address is required
                                             <?php endif?>
                                         </div>
-
-<input type="date" id="date" name="date" class="form-control" placeholder="Date" required value="<?=$concert->getDate()()?>" >
+<!-- <input type="date" id="date" name="date" class="form-control" placeholder="Date" required value=<?=$concert->getDate()->format('Y-m-d')?> >
       <div class="error">
                                             <?php if (isset($_GET['date']) && $_GET['date'] == 'false'): ?>
                                                 Date is required
                                             <?php endif?>
-                                        </div>
+                                        </div> -->
 
                                          <input type="number" id="spots" name="spots" class="form-control" placeholder="Spots" value="<?=$concert->getSpots()?>"  >
 

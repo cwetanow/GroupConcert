@@ -37,6 +37,14 @@ if (isset($current_user) && $current_user !== $concert->getHostId()) {
 }
 ?>
 
+<div class="float-right">
+                                <?php
+if (isset($current_user) && $current_user === $concert->getHostId()) {
+    echo '<a class="btn btn-lg" href="../controllers/GetEditConcert.php?id=' . $concert->getId() . '"><button class="btn btn-lg" type="submit">Edit</button></a>';
+            echo '<form method="post" action="../controllers/DeleteConcert.php?id=' . $concert->getId() . '"><button class="btn btn-danger btn-lg" type="submit">Delete</button></form>';
+}
+?></div>
+
                                 <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
         <div class="col-md-6 px-0">
           <h1 class="display-4 font-italic"><?= $concert->getTitle() ?></h1>

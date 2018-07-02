@@ -16,8 +16,8 @@ $is_title_valid   = Validator::exists($title);
 
 session_start();
 if (!isset($_SESSION['current_user_id'])) {
-    $error = new Error("Only authorized users can create new project.", 401);
-    echo json_encode($error);
+    header('Location: ../views/Error.php?message=Only authenticated users can host concert.&status_code=401');
+
 }
 if (!$is_address_valid || !$is_city_valid || !$is_date_valid || !$is_title_valid) {
     header('Location: ../views/Host.php?address=' . json_encode($is_address_valid) . '&city=' . json_encode($is_city_valid) . '&date=' . json_encode($is_date_valid) . '&title=' . json_encode($is_title_valid));

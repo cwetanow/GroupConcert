@@ -12,6 +12,8 @@ session_start();
 
 if(!isset($_SESSION['current_user_id'])) {
     http_response_code(401);
+    header('Location: ../views/Error.php?message=Only authenticated users can comment.&status_code=401');
+    
 } else {
 	$current_user = $_SESSION['current_user_id'];
 	$comment_text = $_POST['comment_text'];
@@ -33,6 +35,7 @@ if(!isset($_SESSION['current_user_id'])) {
 	header('Location: ./GetConcert.php?id='.$concert_id);    
   } else {
     http_response_code(401);
+    header('Location: ../views/Error.php?message=Only joined users can comment.&status_code=401');
   }
 }
 }
