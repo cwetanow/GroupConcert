@@ -27,6 +27,7 @@ CREATE TABLE concert_participants (
   concert_id INT NOT NULL,
   FOREIGN KEY (user_id) REFERENCES users(id),
   FOREIGN KEY (concert_id) REFERENCES concerts(id)
+        ON DELETE CASCADE  
 );
 
 CREATE TABLE comments (
@@ -36,6 +37,7 @@ CREATE TABLE comments (
   comment_text VARCHAR(500),
   FOREIGN KEY (user_id) REFERENCES users(id),
   FOREIGN KEY (concert_id) REFERENCES concerts(id)
+        ON DELETE CASCADE
 );
 
 CREATE TABLE concert_perform_requests (
@@ -44,4 +46,5 @@ CREATE TABLE concert_perform_requests (
   status INT DEFAULT 0,
   FOREIGN KEY (user_id) REFERENCES users(id),
   FOREIGN KEY (concert_id) REFERENCES concerts(id)
+        ON DELETE CASCADE
 );
