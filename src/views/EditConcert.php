@@ -21,7 +21,7 @@
     <?php include '../views/Header.php'?>
 
       <main role="main" class="inner cover">
-      <form class="custom-form" method="post" action="../controllers/EditConcert.php">
+      <form class="custom-form" method="post" action="<?='../controllers/EditConcert.php?id='.$concert->getId()?>">
 
       <input type="text" id="title" name="title" class="form-control" placeholder="Title" required value="<?=$concert->getTitle()?>">
       <div class="error">
@@ -43,12 +43,12 @@
                                                 Address is required
                                             <?php endif?>
                                         </div>
-<!-- <input type="date" id="date" name="date" class="form-control" placeholder="Date" required value=<?=$concert->getDate()->format('Y-m-d')?> >
+ <input type="date" id="date" name="date" class="form-control" placeholder="Date" required value=<?=$concert->getDate()?> >
       <div class="error">
                                             <?php if (isset($_GET['date']) && $_GET['date'] == 'false'): ?>
                                                 Date is required
                                             <?php endif?>
-                                        </div> -->
+                                        </div> 
 
                                          <input type="number" id="spots" name="spots" class="form-control" placeholder="Spots" value="<?=$concert->getSpots()?>"  >
 
