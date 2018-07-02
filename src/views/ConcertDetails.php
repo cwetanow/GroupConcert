@@ -27,7 +27,7 @@ include '../views/Header.php';
 if (isset($current_user) && $current_user !== $concert->getHostId()) {
     if ($concert->hasEmptySlots() && !$isUserParticipant) {
         if (isset($hasSentRequest) && !$hasSentRequest) {
-            echo '<form class="custom-form float-right" method="post" action="../controllers/JoinConcert.php?id=' . $concert->getId() . '"><button class="btn btn-lg btn-primary btn-block" type="submit">Join</button></form>';
+            echo '<form class="custom-form float-right" method="post" action="../controllers/JoinConcert.php?id=' . $concert->getId() . '"><button class="btn btn-lg btn-block" type="submit">Join</button></form>';
         }
     } else if ($isUserParticipant) {
         echo '<p>You have joined this concert.</p>';
@@ -64,7 +64,7 @@ if ($concert->getPerformerId()) {
       </div>
                                     <?php
 if (!$concert->getPerformerId() && isset($hasSentRequest) && !$hasSentRequest && !$isUserParticipant) {
-    echo '<form class="custom-form float-right" method="post" action="../controllers/PostPerformRequest.php?id=' . $concert->getId() . '"><button class="btn btn-lg btn-primary btn-block" type="submit">Perform</button></form>';
+    echo '<form class="custom-form float-right" method="post" action="../controllers/PostPerformRequest.php?id=' . $concert->getId() . '"><button class="btn btn-lg btn-block" type="submit">Perform</button></form>';
 } else if ($current_user === $concert->getPerformerId()) {
     echo '<p>You are performing at this concert.</p>';
 } else if (isset($hasSentRequest) && $hasSentRequest){
@@ -86,8 +86,8 @@ if (!$concert->getPerformerId() && isset($current_user) && $current_user === $co
                           <?php
     if (!$concert->getPerformerId() && isset($perform_requests)) {
         foreach ($perform_requests as $perform_request) {
-            echo '<tr><td>' . $perform_request->getUsername() . '</td><td><form method="post" action="../controllers/ApproveRequest.php?id=' . $concert->getId() . '&userId=' . $perform_request->getId() . '"><button class="btn btn-sm btn-primary btn-block" type="submit">Approve</button></form></td>';
-            echo '<td><form method="post" action="../controllers/RejectRequest.php?id=' . $concert->getId() . '&userId=' . $perform_request->getId() . '"><button class="btn btn-sm btn-primary btn-block" type="submit">Reject</button></form></td></tr>';
+            echo '<tr><td>' . $perform_request->getUsername() . '</td><td><form method="post" action="../controllers/ApproveRequest.php?id=' . $concert->getId() . '&userId=' . $perform_request->getId() . '"><button class="btn btn-sm btn-block" type="submit">Approve</button></form></td>';
+            echo '<td><form method="post" action="../controllers/RejectRequest.php?id=' . $concert->getId() . '&userId=' . $perform_request->getId() . '"><button class="btn btn-sm btn-block" type="submit">Reject</button></form></td></tr>';
         }
     }
 ?>
@@ -104,7 +104,7 @@ if (isset($current_user) && ($current_user === $concert->getHostId() || $isUserP
             <h5 class="card-header">Leave a Comment:</h5>
             <div class="card-body">
             <?php
-  echo ' <form method="post" action="../controllers/PostComment.php?id='.$concert->getId().'"><div class="form-group"><textarea class="form-control" id="comment_text" name="comment_text" required rows="3"></textarea></div><button type="submit" class="btn btn-primary">Submit</button></form>';
+  echo ' <form method="post" action="../controllers/PostComment.php?id='.$concert->getId().'"><div class="form-group"><textarea class="form-control" id="comment_text" name="comment_text" required rows="3"></textarea></div><button type="submit" class="btn ">Submit</button></form>';
 ?>
              
             </div>
