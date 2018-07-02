@@ -13,10 +13,8 @@ $is_password_valid = Validator::exists($password);
 if (!$is_username_valid || !$is_password_valid) {
     header('Location: ../views/Login.php?username=' . json_encode($is_username_valid) . '&password=' . json_encode($is_password_valid));
 } else {
-    $password_hash = password_hash($password, PASSWORD_DEFAULT);
-
-    $user = User::getUser($username, $password_hash);
-    if ($user->getUsername() && $user->getId()) {
+    $user = User::getUserByUsername($username);
+    if (password_verify($password, $user->getPassword())) {
         session_start();
         $_SESSION['current_user_username'] = $user->getUsername();
         $_SESSION['current_user_id']       = $user->getId();

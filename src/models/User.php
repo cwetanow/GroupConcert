@@ -108,6 +108,7 @@ class User implements \JsonSerializable
             $user->setUsername($found_user['username']);
             $user->setFullName($found_user['full_name']);
             $user->setId($found_user['id']);
+            $user->setPassword($found_user['password']);
         }
 
         return $user;
