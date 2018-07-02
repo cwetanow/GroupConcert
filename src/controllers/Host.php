@@ -26,8 +26,9 @@ if (!$is_address_valid || !$is_city_valid || !$is_date_valid || !$is_title_valid
     $concert      = Concert::create($address, $city, $date, $current_user, $title, $spots);
     
     try {
-        $concert->insert();
-        header('Location: ./GetAllConcerts.php');
+      $id=  $concert->insert();
+
+        header('Location: ./GetConcert.php?id='.$id);
     }
     catch (Exception $ex) {
         http_response_code(500);

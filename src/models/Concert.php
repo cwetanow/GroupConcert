@@ -236,9 +236,13 @@ class Concert implements \JsonSerializable
 
     public function insert()
     {
-        $query = (new Db())->getConn()->prepare("INSERT INTO `concerts` (start_date, host_id, address, title, city, spots) VALUES (?, ?, ?, ?, ?, ?) ");
+        $db = (new Db())->getConn();
 
-        return $query->execute([$this->date, $this->host_id, $this->address, $this->title, $this->city, $this->spots]);
+        $query = $db->prepare("INSERT INTO `concerts` (start_date, host_id, address, title, city, spots) VALUES (?, ?, ?, ?, ?, ?) ");
+
+        $query->execute([$this->date, $this->host_id, $this->address, $this->title, $this->city, $this->spots]);
+
+        return $db->lastInsertId();
     }
 
     public static function delete($concert_id)
